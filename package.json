@@ -1,0 +1,29 @@
+{
+  "name": "Servicio-Andaluz-de-Salud-SAS-",
+  "version": "1.0.0",
+  "description": "examen",
+  "main": "index.js",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "forms": "^1.3.2",
+    "mongoose": "^6.9.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pabloguibe/Servicio-Andaluz-de-Salud-SAS-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pabloguibe/Servicio-Andaluz-de-Salud-SAS-/issues"
+  },
+  "homepage": "https://github.com/pabloguibe/Servicio-Andaluz-de-Salud-SAS-#readme"
+}

@@ -1,0 +1,13 @@
+.escudo {
+    display: block;
+    margin: auto;
+    padding: 150px;
+}
+
+.texto{
+    text-align: center;
+}
+
+.fila{
+    margin-left: 20px;
+}

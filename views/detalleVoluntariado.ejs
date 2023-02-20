@@ -1,0 +1,115 @@
+<%- include("Template/cabecera", {tituloweb: 'Detalles del Voluntariado' }) %>
+    <% if (error) { %>
+        <%= mensaje %>
+            <a href="/Voluntariado" class="btn btn-dark btn-block my-2">
+                Volver
+            </a>
+            <% } %>
+                <% if (!error) { %>
+                    <div class="container">
+                        <div class="bg">
+                            <table class="table">
+                                <h1 class="h1">Detalles del Voluntariado</h1>
+                                <br>
+                                <tbody>
+                                    <% if (!error) { %>
+                                        <form id="editar" data-id="<%= Voluntariado.id %>">
+                                            <br>
+                                            nombre
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.nombre %>" class="fila"
+                                                name="nombre" id="nombreInput">
+                                            <br>
+                                            apellido1
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.apellido1 %>" class="fila"
+                                                name="apellido1" id="apellido1Input">
+                                            <br>
+                                            apellido2
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.apellido2 %>" class="fila"
+                                                name="apellido2" id="apellido2Input">
+                                            <br>
+                                            telefono
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.telefono%>" class="fila"
+                                                name="telefono" id="telefonoInput">
+                                            <br>
+                                            dni
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.dni%>" class="fila" name="dni"
+                                                id="dniInput">
+                                            <br>
+                                            formacion
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.formacion%>" class="fila"
+                                                name="formacion" id="formacionInput">
+                                            <br>
+                                            experiencia
+                                            <br>
+                                            <input type="text" value="<%= Voluntariado.experiencia%>" class="fila"
+                                                name="experiencia" id="experienciaInput">
+                                            <br>
+                                            <br>
+
+                                            <button class="btn3 btn-warning btn-sm" type="submit">
+                                                Editar
+                                            </button>
+                                            <button class="btn3 btn-danger btn-sm" data-id="<%= Voluntariado.id %>">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% } %>
+
+                        <%- include("template/footer") %>
+                            <script>
+                                const btnEliminar = document.querySelector('.btn-danger')
+                                btnEliminar.addEventListener('click', async () => {
+                                    console.log(btnEliminar.dataset.id)
+                                    try {
+                                        const data = await fetch(`/Voluntariado/${btnEliminar.dataset.id}`, {
+                                            method: 'delete'
+                                        })
+                                        const res = await data.json()
+                                        console.log(res)
+                                        if (res.estado) {
+                                            window.location.href = '/Voluntariado'
+                                        } else {
+                                            console.log(res)
+                                        }
+                                    } catch (error) {
+                                        console.log(error)
+                                    }
+                                })
+                                const formEditar = document.querySelector('#editar');
+                                formEditar.addEventListener('submit', async (e) => {
+                                    e.preventDefault()
+                                    const nombre = formEditar.elements['nombre'].value
+                                    const apellido1 = formEditar.elements['apellido1'].value
+                                    const apellido2 = formEditar.elements['apellido2'].value
+                                    const telefono = formEditar.elements['telefono'].value
+                                    const dni = formEditar.elements['dni'].value
+                                    const formacion = formEditar.elements['formacion'].value
+                                    const experiencia = formEditar.elements['experiencia'].value
+
+                                    const id = formEditar.dataset.id
+                                    const data = await fetch(`/Voluntariado/${id}`, {
+                                        method: 'PUT',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ nombre, apellido1, apellido2, telefono, dni, formacion, experiencia })
+                                    })
+                                    const res = await data.json()
+                                    if (res.estado) {
+                                        window.location.href = '/Voluntariado'
+                                    } else {
+                                        console.log(res)
+                                    }
+                                })
+                            </script>

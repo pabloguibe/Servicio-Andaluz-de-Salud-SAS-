@@ -1,0 +1,128 @@
+<%- include("Template/cabecera", {tituloweb: 'Detalles de la Persona Mayor' }) %>
+    <% if (error) { %>
+        <%= mensaje %>
+            <a href="/PersonaMayor" class="btn btn-dark btn-block my-2">
+                Volver
+            </a>
+            <% } %>
+                <% if (!error) { %>
+                    <div class="container">
+                        <div class="bg">
+                            <table class="table">
+                                <h1 class="h1">Detalles de la Persona Mayor</h1>
+                                <br>
+                                <tbody>
+                                    <% if (!error) { %>
+                                        <form id="editar" data-id="<%= PersonaMayor.id %>">
+                                            nombre
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.nombre %>" class="fila"
+                                                name="nombre" id="nombreInput">
+                                            <br>
+                                            apellido1
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.apellido1 %>" class="fila"
+                                                name="apellido1" id="apellido1Input">
+                                            <br>
+                                            apellido2
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.apellido2 %>" class="fila"
+                                                name="apellido2" id="apellido2Input">
+                                            <br>
+                                            telefono
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.telefono%>" class="fila"
+                                                name="telefono" id="telefonoInput">
+                                            <br>
+                                            dni
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.dni%>" class="fila" name="dni"
+                                                id="dniInput">
+                                            <br>
+                                            patologias
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.patologias%>" class="fila"
+                                                name="patologias" id="patologiasInput">
+                                            <br>
+                                            fechavisita
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.fechavisita%>" class="fila"
+                                                name="fechavisita" id="fechavisitaInput">
+                                            <br>
+                                            lugar
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.lugar%>" class="fila"
+                                                name="lugar" id="lugarInput">
+                                            <br>
+                                            observacion
+                                            <br>
+                                            <input type="text" value="<%= PersonaMayor.observacion%>" class="fila"
+                                                name="observacion" id="observacionInput">
+                                            <br>
+                                            <br>
+
+
+                                            <button class="btn3 btn-warning btn-sm" type="submit">
+                                                Editar
+                                            </button>
+                                            <button class="btn3 btn-danger btn-sm" data-id="<%= PersonaMayor.id %>">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% } %>
+
+                        <%- include("template/footer") %>
+                            <script>
+                                const btnEliminar = document.querySelector('.btn-danger')
+                                btnEliminar.addEventListener('click', async () => {
+                                    console.log(btnEliminar.dataset.id)
+                                    try {
+
+                                        const data = await fetch(`/PersonaMayor/${btnEliminar.dataset.id}`, {
+                                            method: 'delete'
+                                        })
+                                        const res = await data.json()
+                                        console.log(res)
+                                        if (res.estado) {
+                                            window.location.href = '/PersonaMayor'
+                                        } else {
+                                            console.log(res)
+                                        }
+                                    } catch (error) {
+                                        console.log(error)
+                                    }
+                                })
+                                const formEditar = document.querySelector('#editar');
+                                formEditar.addEventListener('submit', async (e) => {
+                                    e.preventDefault()
+                                    const nombre = formEditar.elements['nombre'].value
+                                    const apellido1 = formEditar.elements['apellido1'].value
+                                    const apellido2 = formEditar.elements['apellido2'].value
+                                    const telefono = formEditar.elements['telefono'].value
+                                    const dni = formEditar.elements['dni'].value
+                                    const patologias = formEditar.elements['patologias'].value
+                                    const fechavisita = formEditar.elements['fechavisita'].value
+                                    const lugar = formEditar.elements['lugar'].value
+                                    const observacion = formEditar.elements['observacion'].value
+
+                                    const id = formEditar.dataset.id
+                                    const data = await fetch(`/PersonaMayor/${id}`, {
+                                        method: 'PUT',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ nombre, apellido1, apellido2, telefono, dni, patologias, fechavisita, lugar, observacion })
+                                    })
+                                    const res = await data.json()
+                                    if (res.estado) {
+                                        window.location.href = '/PersonaMayor'
+                                    } else {
+                                        console.log(res)
+                                    }
+                                })
+                            </script>

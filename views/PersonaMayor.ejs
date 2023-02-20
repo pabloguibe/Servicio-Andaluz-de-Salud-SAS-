@@ -1,0 +1,67 @@
+<%- include("Template/cabecera", {tituloweb: "Pagina de inicio" }) %>
+    <div class="container">
+        <br>
+        <h1>LISTA DE PERSONA MAYOR</h1>
+        <a class="btn btn-success btn-block my-4" href="/PersonaMayor/crear">Crear una nueva Persona Mayor</a>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido1</th>
+                    <th scope="col">Apellido2</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Patologias</th>
+                    <th scope="col">Fecha Visita</th>
+                    <th scope="col">Lugar</th>
+                    <th scope="col">Observacion</th>
+                    <th scope="col" class="accion">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayPersonaMayor.length> 0) { %>
+                    <% arrayPersonaMayor.forEach(PersonaMayor=> { %>
+                        <tr>
+                            <th scope="row">
+                                <%= PersonaMayor.id %>
+                            </th>
+                            <td>
+                                <%= PersonaMayor.nombre %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.apellido1 %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.apellido2 %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.telefono %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.dni %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.patologias %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.fechavisita %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.lugar %>
+                            </td>
+                            <td>
+                                <%= PersonaMayor.observacion %>
+                            </td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="PersonaMayor/<%= PersonaMayor.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <% } %>
+            </tbody>
+        </table>
+
+    </div>
+    <%- include("Template/footer") %>

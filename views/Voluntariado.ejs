@@ -1,0 +1,59 @@
+<%- include("Template/cabecera", {tituloweb: "Pagina de inicio" }) %>
+    <div class="container">
+        <br>
+        <h1>LISTA DE VOLUNTARIADO</h1>
+        <a class="btn btn-success btn-block my-4" href="/Voluntariado/crearVoluntariado">Crear un nuevo Voluntariado</a>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido1</th>
+                    <th scope="col">Apellido2</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Formacion</th>
+                    <th scope="col">Experiencia</th>
+                    <th scope="col" class="accion">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayVoluntariado.length> 0) { %>
+                    <% arrayVoluntariado.forEach(Voluntariado=> { %>
+                        <tr>
+                            <th scope="row">
+                                <%= Voluntariado.id %>
+                            </th>
+                            <td>
+                                <%= Voluntariado.nombre %>
+                            </td>
+                            <td>
+                                <%= Voluntariado.apellido1 %>
+                            </td>
+                            <td>
+                                <%= Voluntariado.apellido2 %>
+                            </td>
+                            <td>
+                                <%= Voluntariado.telefono %>
+                            </td>
+                            <td>
+                                <%= Voluntariado.dni %>
+                            </td>
+                            <td>
+                                <%= Voluntariado.formacion %>
+                            </td>
+                            <td>
+                                <%= Voluntariado.experiencia %>
+                            </td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="Voluntariado/<%= Voluntariado.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                            <% } %>
+            </tbody>
+        </table>
+
+    </div>
+    <%- include("Template/footer") %>
